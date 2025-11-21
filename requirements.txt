@@ -1,0 +1,7 @@
+discord.py
+python-dotenv
+numpy
+joblib
+sentence-transformers
+requests
+transformers
