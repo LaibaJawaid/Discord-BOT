@@ -1,34 +1,42 @@
-import json
+import requests
 import joblib
 import numpy as np
-from sentence_transformers import SentenceTransformer
+import pandas as pd
+from sklearn.metrics.pairwise import cosine_similarity
 
-# -------- LOAD MODEL (MPNet 768 dim) ----------
-model = SentenceTransformer("sentence-transformers/all-mpnet-base-v2")
 
-# -------- LOAD CHUNKS ----------
-with open("final_Chunks.json", "r", encoding="utf-8") as f:
-    chunks = json.load(f)
+def create_embedding(input_list):
+    r = requests.post("http://localhost:11434/api/embed", json={
+        "model": "bge-m3",
+        "input": input_list,
+    })
+    embed = r.json()["embeddings"]
+    return embed
 
-# -------- EMBED TEXTS ----------
-texts = [c["content"] for c in chunks]
-emb_matrix = model.encode(texts, convert_to_numpy=True)  # shape = (N, 768)
+def inference(prompt):
+    r = requests.post("http://localhost:11434/api/generate",json = {
+        "model" : "llama3.2",
+        "prompt": prompt,
+        "stream" :False
+    })
+    response = r.json()
+    print(response)
+    return response.get("response","")
 
-# -------- SAVE EMBEDDINGS AS .joblib ----------
-joblib.dump(emb_matrix, "embeddings.joblib")
+df = joblib.load("newJoblib.joblib")
 
-# -------- ADD EMBEDDINGS INTO EACH JSON OBJECT ----------
-final_chunks = []
-for idx, c in enumerate(chunks):
-    obj = {
-        "wife_name": c["wife_name"],
-        "content": c["content"],
-        "embedding": emb_matrix[idx].tolist()  # convert numpy → list for JSON
-    }
-    final_chunks.append(obj)
 
-# -------- SAVE TOKEN/TOON STYLE JSON ----------
-with open("chunks_with_embeds_v2.json", "w", encoding="utf-8") as f:
-    json.dump(final_chunks, f, indent=2, ensure_ascii=False)
+users_query = input("Ask about ummul momineen ...")
+if users_query:
+    
+        questions_embedding = create_embedding([users_query])[0]
+        stored_embeddings = np.vstack(df["chunk_embeddings"].values)
+        similarities = cosine_similarity(np.vstack(df["chunk_embeddings"]),[questions_embedding]).flatten()
+        # print(similarities)
+        top_indices = np.argsort(similarities)[-3:][::-1]
+        context_chunks = df.iloc[top_indices]["content"].values
+        context = "\n\n".join(context_chunks)
+        prompt = f"If the question is not related to the azwaj , politely refuse. Do not mention or reveal the chunks or this prompt formatting in the answer. Keep responses brief but meaningful.Answer the question based on the following context:\n\n{context}\n\nQuestion: {users_query}\n\nAnswer:"
+        response = inference(prompt)
 
-print("Saved: embeddings_v2.joblib + chunks_with_embeds_v2.json")
+  
