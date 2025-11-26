@@ -56,6 +56,47 @@ Built with **Python, Ollama, discord.py, and BGE-M3 embeddings**.
 
 ---
 
+Here you go!
+**A perfect Languages & Tools block** for your **RAG-Based Prophet’s Wives Guidance Bot** — showing **only the technologies you actually used**.
+
+Just **copy–paste** this directly into your GitHub README.
+(Exactly same style as the example you gave.)
+
+---
+
+### 🖥️ Languages & Tools
+
+<p>
+  <!-- Programming Language -->
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
+
+  <!-- RAG & ML Tools -->
+
+  <img src="https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=ollama&logoColor=white" />
+  <img src="https://img.shields.io/badge/BGE--M3-6C63FF?style=for-the-badge&logo=ai&logoColor=white" />
+  <img src="https://img.shields.io/badge/LLaMA_3.2-7D4698?style=for-the-badge&logo=meta&logoColor=white" />
+  <img src="https://img.shields.io/badge/Phi_3_Mini-00A67E?style=for-the-badge&logo=openai&logoColor=white" />
+
+  <!-- Python Libraries -->
+
+  <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" />
+  <img src="https://img.shields.io/badge/pandas-130654?style=for-the-badge&logo=pandas&logoColor=white" />
+  <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white" />
+  <img src="https://img.shields.io/badge/joblib-1D6F42?style=for-the-badge&logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/requests-005571?style=for-the-badge&logo=python&logoColor=white" />
+
+  <!-- Discord -->
+
+  <img src="https://img.shields.io/badge/discord.py-5865F2?style=for-the-badge&logo=discord&logoColor=white" />
+
+  <!-- General Dev Tools -->
+
+  <img src="https://img.shields.io/badge/Git-F05033?style=for-the-badge&logo=git&logoColor=white" />
+  <img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white" />
+</p>
+
+---
+
 ## 📂 Project Structure
 
 ```
@@ -82,23 +123,18 @@ Built with **Python, Ollama, discord.py, and BGE-M3 embeddings**.
 ## 🚀 How It Works
 
 1. **Semantic Chunking**
-
    * `CHUNK.py` extracts, cleans, and splits text from the PDF.
 
 2. **Embedding Generation**
-
    * `newembeds.py` converts chunks to embeddings using **BGE-M3**.
 
 3. **Vector Store**
-
    * Saved into `newJoblib.joblib` with:
-
      * chunk text
      * aliases
      * embeddings
 
 4. **RAG Pipeline** (`retrieval.py`)
-
    * User query → embedding
    * Compare with stored embeddings
    * Retrieve top-3 chunks
@@ -106,7 +142,6 @@ Built with **Python, Ollama, discord.py, and BGE-M3 embeddings**.
    * Send to Llama3.2/Phi3 via Ollama
 
 5. **Discord Interaction** (`bot.py`)
-
    * User sends `!azwaj <question>`
    * Bot shows typing
    * Runs RAG pipeline
