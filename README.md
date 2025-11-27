@@ -1,7 +1,7 @@
 # 🌺 RAG-Based — Great Lives of Ummahat-ul-Mu'minin — Guidance Bot
 
 A highly accurate **Retrieval-Augmented Islamic Guidance Bot** that answers questions about the **Mothers of the Believers (Azwāj al-Mu’minīn)** using a custom knowledge base, semantic search, and local LLM generation.
-Built with **Python, Ollama, discord.py, and BGE-M3 embeddings**.
+Built with **Python, Ollama, discord.py, BGE-M3 embeddings and LLAMA 3.2 for user response**.
 
 ---
 
@@ -50,7 +50,7 @@ Built with **Python, Ollama, discord.py, and BGE-M3 embeddings**.
 | **discord.py**           | Bot framework     | Discord command handling       |
 | **Ollama**               | Local LLM runtime | Embedding & generation         |
 | **BGE-M3**               | Embedding model   | High-accuracy semantic vectors |
-| **Llama3.2 / Phi3-Mini** | LLM               | Contextual response generation |
+| **Llama3.2**             | LLM               | Contextual response generation |
 | **Joblib + Pandas**      | Vector store      | Stores chunks & embeddings     |
 | **Cosine Similarity**    | sklearn           | Ranking chunks by relevance    |
 
